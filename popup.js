@@ -20,13 +20,28 @@ document.addEventListener('DOMContentLoaded', function() {
 }, false);
 
 
-function updateIcon() {
-  console.log("Update");
+function InitialMsg() {
+  console.log("It is Working!");
 
 }
 
-chrome.browserAction.onClicked.addListener(updateIcon);
-updateIcon();
-document.addEventListener("fill_siga", function() {
-  console.log("BBBBBBBBBBB");
+
+/**
+ * This code start "after" html code definitions
+ * Get the element checkPage (a button) and criate a listener for the
+ * function of click
+ */
+window.onload = function() {
+  InitialMsg();
+
+  document.getElementById("checkPage").addEventListener("click", function(){
+    var status = document.getElementById("checkS").checked;
+    if(status == true){
+       document.getElementById("checkS").checked = false;
+    }
+    else{
+      document.getElementById("checkS").checked = true;      
+    }
+  });
+  
 }
