@@ -4,13 +4,28 @@
   "name": "RoboCIn Presence Plugin",
   "description": "This extension will fill your siga",
   "version": "0.01",
-
+  "permissions": ["alarms", "tabs", "bookmarks","activeTab", "*://*/*"],
   "browser_action": {
    "default_icon": "icon.png",
    "default_popup": "popup.html"
   },
-  "background": { "scripts": ["popup.js"] },
-  "permissions": [
-   "activeTab"
-   ]
+  "icons": {
+    "128": "icon.png",
+    "48": "icon.png",
+    "16": "icon.png"
+  },
+  "background": { 
+    "scripts": ["popup.js","background.js"],
+    "persistent": false
+  },
+  "commands": {
+    "open-google": {
+      "description": "Open a tab to google.com",
+      "suggested_key": { "default": "Ctrl+Shift+L" }
+    },
+    "_execute_browser_action": {
+      "suggested_key": { "default": "Ctrl+Shift+K" }
+    }
+  }
+
 }
