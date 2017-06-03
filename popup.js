@@ -11,7 +11,7 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true},
   });
 
 window.onload = function() {
-  InitialMsg();
+
  
   document.getElementById("pagebutton").addEventListener("click", function(){
     var status = document.getElementById("checkS").checked;

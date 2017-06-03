@@ -1,0 +1,69 @@
+<html>
+<head>
+	<title>Lista de Chamada</title>
+</head>
+<body>
+	<h1> Sig@ </h1>
+		Novo Aluno :<input type="text" id="newName" name="StudantName" value="Lucas">
+		<button onclick="AddCheckBox()" id="newStudant">Add</button>
+		<button onclick="checkPersonInTheBox(true)" id="checkNew">Check</button>
+		<button onclick="checkPersonInTheBox(false)" id="checkNew">Check</button>
+
+	<h1>Alunos</h1>
+
+	<ul id="ClassRoom">
+  		<input type="checkbox" name="Kiev Gama" value="Kiev Gama" />Kiev Gama <br>
+  		<input type="checkbox" name="Gabriel Bandeira" value="Gabriel Bandeira" />Gabriel Bandeira<br>
+  		<input type="checkbox" name="Junior Lima" value="Junior Lima" />Junior Lima<br>
+  		<input type="checkbox" name="Heitor Rapela" value="Heitor Rapela" />Heitor Rapela<br>
+	</ul>
+		<br /><br />
+
+	<button onclick="checkPerson('Kiev Gama', true)">Check Kiev</button>
+	<button onclick="checkPerson('Kiev Gama', false)">UnCheck Kiev</button>
+	
+	<button onclick="checkPerson('Lucas', true)">Check Lucas</button>
+	<button onclick="checkPerson('Lucas', false)">UnCheck Lucas</button>
+
+	<script>
+		function checkPersonInTheBox(sel)
+		{
+			var studentName = document.getElementById('newName').value;
+			checkPerson(studentName,sel);
+
+		}
+		function checkPerson(name, sel) 
+		{
+		  checkboxes = document.getElementsByName(name);
+		  for(var i=0, n=checkboxes.length;i<n;i++) {
+		    checkboxes[i].checked = sel;
+		  }
+		}
+		function AddCheckBox() 
+		{
+		    // Get Name
+		    var studentName = document.getElementById('newName').value
+		    
+		    // Show the name
+		    var newName = document.createElement("textName");
+    		var t = document.createTextNode(studentName);
+    		newName.appendChild(t);   
+		    var breakLine = document.createElement("br");
+
+			// Create CheckBox
+			var newCheckBox = document.createElement("INPUT");
+		    newCheckBox.setAttribute("type", "checkbox");   
+		    newCheckBox.setAttribute("name", studentName);   
+		    
+		    var listOfStudents = document.getElementById("ClassRoom");
+		    listOfStudents.appendChild(newCheckBox);
+		    listOfStudents.appendChild(newName);
+		    listOfStudents.appendChild(breakLine);
+		}
+		function hello() {
+			console.log("Hello");
+			// body...
+		}
+	</script>
+</body>
+</html>
