@@ -1,40 +1,19 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var checkPageButton = document.getElementById('checkPage');
-  checkPageButton.addEventListener('click', function() {
-
-    chrome.tabs.getSelected(null, function(tab) {
-      d = document;
-
-      var f = d.createElement('form');
-      f.action = 'http://cin.ufpe.br/~robocin/?bm';
-      f.method = 'post';
-      var i = d.createElement('input');
-      i.type = 'hidden';
-      i.name = 'url';
-      i.value = tab.url;
-      f.appendChild(i);
-      d.body.appendChild(f);
-      f.submit();
-    });
-  }, false);
-}, false);
-
-
-function InitialMsg() {
-  console.log("It is Working!");
-
-}
-
-
 /**
- * This code start "after" html code definitions
- * Get the element checkPage (a button) and criate a listener for the
- * function of click
+ * Print the current url
  */
+chrome.tabs.query({ active: true, lastFocusedWindow: true}, 
+    function(array_of_Tabs) { // Since there can only be one active tab in one active window, 
+                              //  the array has only one element
+      var tab = array_of_Tabs[0];
+      var url = tab.url;
+      console.log("new Current " + url);
+
+  });
+
 window.onload = function() {
   InitialMsg();
-
-  document.getElementById("checkPage").addEventListener("click", function(){
+ 
+  document.getElementById("pagebutton").addEventListener("click", function(){
     var status = document.getElementById("checkS").checked;
     if(status == true){
        document.getElementById("checkS").checked = false;
@@ -45,3 +24,29 @@ window.onload = function() {
   });
   
 }
+
+
+/**
+ * Starts a background script if the buttun is clicked.
+ *
+ * @param  e       { parameter_description }
+ */
+function startBackgroundScript(e) {
+  chrome.tabs.executeScript(null,
+    {
+      file:"background.js"
+    });
+  //window.close();
+}
+
+/**
+ *  add event listener to a group of buttuns
+ */
+document.addEventListener('DOMContentLoaded', function () {
+  var startButton = document.querySelectorAll('button');
+  for (var i = 0; i < startButton.length; i++) {
+    startButton[i].addEventListener('click', startBackgroundScript);
+  }
+});
+
+
