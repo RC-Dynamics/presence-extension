@@ -1,0 +1,23 @@
+[
+    {
+        "_id": "593ff07d1e60f715d7eb5cab",
+        "idThing": 1,
+        "__v": 1,
+        "endTime": "2017-06-13T17:02:37.816Z",
+        "startTime": "2017-06-13T14:02:37.816Z",
+        "students": [
+            {
+                "cpf": "1",
+                "nome": "Cris",
+                "idCracha": "2",
+                "_id": "593ff0369cba45156f3a761c"
+            }
+        ],
+        "teacher": {
+            "cpf": "3",
+            "nome": "Roberto",
+            "idCracha": "4",
+            "_id": "593ff0369cba45156f3a761d"
+        }
+    }
+]
