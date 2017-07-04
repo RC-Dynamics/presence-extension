@@ -32,7 +32,11 @@ function httpGet(cpf)
 document.addEventListener('DOMContentLoaded', function () {
   //console.log(document.querySelector('button'));
   //document.querySelector('button').addEventListener('click', httpGet(cpfValue));
-  document.getElementById('RequestJson').addEventListener('click', httpGet(cpfValue));
+  var requestButton = document.getElementById('RequestJson');
+
+  requestButton.addEventListener("click", function(){
+      httpGet(cpfValue);
+  });
 
 });
 
