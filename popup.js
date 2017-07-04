@@ -20,14 +20,14 @@ function setCpfValue(newCpf)
   cpfValue = newCpf;
 }
 
-function httpGet(cpf)
+function httpGet()
 {
-
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "https://ess-20171-presence-server.herokuapp.com/lesson/listByCpf?cpf="+cpf, false ); // false for synchronous request
-    xmlHttp.send( null );
-    console.log( xmlHttp.responseText);
-    return xmlHttp.responseText;
+  cpf = document.getElementById("cpf_value").value;
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", "https://ess-20171-presence-server.herokuapp.com/lesson/listByCpf?cpf="+cpf, false ); // false for synchronous request
+  xmlHttp.send( null );
+  console.log( xmlHttp.responseText);
+  return xmlHttp.responseText;
 }
 document.addEventListener('DOMContentLoaded', function () {
   //console.log(document.querySelector('button'));
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var requestButton = document.getElementById('RequestJson');
 
   requestButton.addEventListener("click", function(){
-      httpGet(cpfValue);
+      httpGet();
   });
 
 });
