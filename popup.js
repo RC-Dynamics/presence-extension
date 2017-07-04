@@ -26,9 +26,14 @@ function httpGet()
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", "https://ess-20171-presence-server.herokuapp.com/lesson/listByCpf?cpf="+cpf, false ); // false for synchronous request
   xmlHttp.send( null );
-  console.log( xmlHttp.responseText);
+  var jsonGet = JSON.parse(xmlHttp.responseText);
+
+  console.log(jsonGet);
+
+
   return xmlHttp.responseText;
 }
+
 document.addEventListener('DOMContentLoaded', function () {
   //console.log(document.querySelector('button'));
   //document.querySelector('button').addEventListener('click', httpGet(cpfValue));
