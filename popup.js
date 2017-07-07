@@ -20,6 +20,15 @@ function setCpfValue(newCpf)
   cpfValue = newCpf;
 }
 
+function addOption(Data)
+{
+    var opt = document.createElement("option");
+    var select = document.getElementById("data_fild");
+    opt.value = Data;
+    opt.innerHTML = Data;
+    select.appendChild(opt);
+}
+
 function httpGet()
 {
   cpf = document.getElementById("cpf_value").value;
@@ -29,6 +38,7 @@ function httpGet()
   var jsonGet = JSON.parse(xmlHttp.responseText);
 
   console.log(jsonGet);
+  addOption(jsonGet[0].startTime);
   //return xmlHttp.responseText;
 }
 
