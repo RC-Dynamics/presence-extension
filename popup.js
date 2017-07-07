@@ -29,19 +29,35 @@ function httpGet()
   var jsonGet = JSON.parse(xmlHttp.responseText);
 
   console.log(jsonGet);
-
-
-  return xmlHttp.responseText;
+  //return xmlHttp.responseText;
 }
+
+function httpGetRaw()
+{
+  cpf = document.getElementById("cpf_value").value;
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", "https://ess-20171-presence-server.herokuapp.com/lesson/listByCpf?cpf="+cpf, false ); // false for synchronous request
+  xmlHttp.send( null );
+  
+  console.log(xmlHttp.responseText);
+  //return xmlHttp.responseText;
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
   //console.log(document.querySelector('button'));
   //document.querySelector('button').addEventListener('click', httpGet(cpfValue));
   var requestButton = document.getElementById('RequestJson');
+  var requestButtonRaw = document.getElementById('RequestJsonRaw');
 
   requestButton.addEventListener("click", function(){
       httpGet();
   });
+
+  requestButtonRaw.addEventListener("click", function(){
+      httpGetRaw();
+  });
+
 
 });
 
