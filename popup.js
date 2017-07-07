@@ -43,11 +43,12 @@ function httpGet()
     select.remove(select.length-1);
     
 
-  console.log(jsonGet.length);
+  console.log(jsonGet);
   
   for (var classTime = 0; classTime < jsonGet.length; classTime++)
     addOption(jsonGet[classTime].startTime);
-  
+  if( jsonGet.length == 0)
+    addOption("CPF Nao encontrado");
   
   //return xmlHttp.responseText;
 }
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
   //document.querySelector('button').addEventListener('click', httpGet(cpfValue));
   var requestButton = document.getElementById('RequestJson');
   var requestButtonRaw = document.getElementById('RequestJsonRaw');
-
+  addOption("Digite Seu CPF");
   requestButton.addEventListener("click", function(){
       httpGet();
   });
