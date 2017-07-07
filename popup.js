@@ -24,6 +24,7 @@ function addOption(Data)
 {
     var opt = document.createElement("option");
     var select = document.getElementById("data_fild");
+  
     opt.value = Data;
     opt.innerHTML = Data;
     select.appendChild(opt);
@@ -37,8 +38,17 @@ function httpGet()
   xmlHttp.send( null );
   var jsonGet = JSON.parse(xmlHttp.responseText);
 
-  console.log(jsonGet);
-  addOption(jsonGet[0].startTime);
+  var select = document.getElementById("data_fild");
+  while (select.length > 0) 
+    select.remove(select.length-1);
+    
+
+  console.log(jsonGet.length);
+  
+  for (var classTime = 0; classTime < jsonGet.length; classTime++)
+    addOption(jsonGet[classTime].startTime);
+  
+  
   //return xmlHttp.responseText;
 }
 
@@ -50,6 +60,11 @@ function httpGetRaw()
   xmlHttp.send( null );
   
   console.log(xmlHttp.responseText);
+
+  var select = document.getElementById("data_fild");
+  while (select.length > 0) 
+    select.remove(select.length-1);
+    
   //return xmlHttp.responseText;
 }
 
