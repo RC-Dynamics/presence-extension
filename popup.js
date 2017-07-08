@@ -110,10 +110,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
   addOption("Digite Seu CPF");
   requestButton.addEventListener("click", function(){
+      var listInHtml = document.getElementById('stdList');
+      while (listInHtml.hasChildNodes()) 
+        listInHtml.removeChild(listInHtml.firstChild);
+    
       httpGet();
   });
 
   requestButtonRaw.addEventListener("click", function(){
+    var listInHtml = document.getElementById('stdList');
+    while (listInHtml.hasChildNodes()) 
+      listInHtml.removeChild(listInHtml.firstChild);
+    
       httpGetRaw();
   });
 
