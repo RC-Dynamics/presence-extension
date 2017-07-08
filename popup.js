@@ -19,6 +19,11 @@ function setCpfValue(newCpf)
 {
   cpfValue = newCpf;
 }
+var chooseData = ' '
+function setChooseData(newData)
+{
+  chooseData = newData;
+}
 
 function addOption(Data)
 {
@@ -29,14 +34,14 @@ function addOption(Data)
     opt.innerHTML = Data;
     select.appendChild(opt);
 }
-
+var jsonGet = '';
 function httpGet()
 {
   cpf = document.getElementById("cpf_value").value;
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", "https://ess-20171-presence-server.herokuapp.com/lesson/listByCpf?cpf="+cpf, false ); // false for synchronous request
   xmlHttp.send( null );
-  var jsonGet = JSON.parse(xmlHttp.responseText);
+  jsonGet = JSON.parse(xmlHttp.responseText);
 
   var select = document.getElementById("data_fild");
   while (select.length > 0) 
@@ -46,12 +51,13 @@ function httpGet()
   console.log(jsonGet);
   
   for (var classTime = 0; classTime < jsonGet.length; classTime++)
-    addOption(jsonGet[classTime].startTime);
+    addOption(classTime + '-' +jsonGet[classTime].startTime);
   if( jsonGet.length == 0)
     addOption("CPF Nao encontrado");
   
   //return xmlHttp.responseText;
 }
+
 
 function httpGetRaw()
 {
@@ -71,10 +77,26 @@ function httpGetRaw()
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  //console.log(document.querySelector('button'));
-  //document.querySelector('button').addEventListener('click', httpGet(cpfValue));
+
   var requestButton = document.getElementById('RequestJson');
   var requestButtonRaw = document.getElementById('RequestJsonRaw');
+  var dates = document.getElementById("data_fild");
+  
+  dates.addEventListener("click", function() {
+    console.log("Selected Data:");
+    console.log(dates.value);
+    if(dates.value == 'CPF Nao encontrado') return;
+    var subDates = dates.value.split("-");
+    var indexClass = parseInt(subDates[0]);
+    classList = jsonGet[indexClass].students;
+    console.log("-- List Of Students --")
+    for(var stList = 0 ; stList < classList.length ; stList++ )
+    {
+      console.log(classList[stList].nome);
+    }
+    
+  });
+
   addOption("Digite Seu CPF");
   requestButton.addEventListener("click", function(){
       httpGet();
@@ -83,6 +105,8 @@ document.addEventListener('DOMContentLoaded', function () {
   requestButtonRaw.addEventListener("click", function(){
       httpGetRaw();
   });
+
+
 
 
 });
