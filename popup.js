@@ -90,9 +90,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var indexClass = parseInt(subDates[0]);
     classList = jsonGet[indexClass].students;
     console.log("-- List Of Students --")
+    var listInHtml = document.getElementById('stdList');
+    
+    while (listInHtml.hasChildNodes()) 
+      listInHtml.removeChild(listInHtml.firstChild);
+    
+
+    //listInHtml.innerHTML = '-- List Of Students --';
     for(var stList = 0 ; stList < classList.length ; stList++ )
     {
       console.log(classList[stList].nome);
+      var node = document.createElement("LI");
+      var textnode = document.createTextNode(classList[stList].nome);
+      node.appendChild(textnode);
+      listInHtml.appendChild(node);
     }
     
   });
