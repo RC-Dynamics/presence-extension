@@ -49,15 +49,17 @@ function httpGet()
     
 
   console.log(jsonGet);
-  
+  if( jsonGet.length == 0)
+    addOption("CPF Nao Encontrado");
+  else
+    addOption("Selecione a Data");
+
   for (var classTime = 0; classTime < jsonGet.length; classTime++){
       var classTime2 = ((classTime < 10)? "0":"") + classTime;
       addOption(classTime2 + '-' + timeConverter(jsonGet[classTime].startTime));
   }
     
-  if( jsonGet.length == 0)
-    addOption("CPF Nao Encontrado");
-  
+
   //return xmlHttp.responseText;
 }
 
@@ -88,17 +90,25 @@ document.addEventListener('DOMContentLoaded', function () {
   dates.addEventListener("change", function() {
     console.log("Selected Data:");
     console.log(dates.value);
+    var listInHtml = document.getElementById('stdList');
+    
     if(dates.value == 'CPF Nao encontrado') return;
+    if(dates.value == "Selecione a Data")
+      {
+        while (listInHtml.hasChildNodes()) 
+          listInHtml.removeChild(listInHtml.firstChild);
+        return;
+      };
     var subDates = dates.value.split("-");
     var indexClass = parseInt(subDates[0]);
     classList = jsonGet[indexClass].students;
     console.log(indexClass)
     console.log("-- List Of Students --")
-    var listInHtml = document.getElementById('stdList');
     
     while (listInHtml.hasChildNodes()) 
       listInHtml.removeChild(listInHtml.firstChild);
     
+
 
     //listInHtml.innerHTML = '-- List Of Students --';
     for(var stList = 0 ; stList < classList.length ; stList++ )
