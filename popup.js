@@ -50,10 +50,13 @@ function httpGet()
 
   console.log(jsonGet);
   
-  for (var classTime = 0; classTime < jsonGet.length; classTime++)
-    addOption(classTime + '-' +jsonGet[classTime].startTime);
+  for (var classTime = 0; classTime < jsonGet.length; classTime++){
+      var classTime2 = ((classTime < 10)? "0":"") + classTime;
+      addOption(classTime2 + '-' + timeConverter(jsonGet[classTime].startTime));
+  }
+    
   if( jsonGet.length == 0)
-    addOption("CPF Nao encontrado");
+    addOption("CPF Nao Encontrado");
   
   //return xmlHttp.responseText;
 }
@@ -82,13 +85,14 @@ document.addEventListener('DOMContentLoaded', function () {
   var requestButtonRaw = document.getElementById('RequestJsonRaw');
   var dates = document.getElementById("data_fild");
   
-  dates.addEventListener("click", function() {
+  dates.addEventListener("change", function() {
     console.log("Selected Data:");
     console.log(dates.value);
     if(dates.value == 'CPF Nao encontrado') return;
     var subDates = dates.value.split("-");
     var indexClass = parseInt(subDates[0]);
     classList = jsonGet[indexClass].students;
+    console.log(indexClass)
     console.log("-- List Of Students --")
     var listInHtml = document.getElementById('stdList');
     
@@ -108,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
   });
 
-  addOption("Digite Seu CPF");
+  addOption("- -   Digite seu CPF   - -");
   requestButton.addEventListener("click", function(){
       var listInHtml = document.getElementById('stdList');
       while (listInHtml.hasChildNodes()) 
@@ -130,6 +134,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-
+function timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var date2 = ((date<10) ? "0" : "")+ date;
+  var hour = a.getHours();
+  var hour2 = ((hour<10) ? "0" : "")+ hour;
+  var min = a.getMinutes();
+  var min2 = ((min<10) ? "0" : "")+ min;
+  var sec = a.getSeconds();
+  var sec2 = ((sec<10) ? "0" : "")+ sec;
+  var time = date2 + ' ' + month + ' ' + year + ' ' + hour2 + ':' + min2 + ':' + sec2 ;
+  return time;
+}
 
 // https://ess-20171-presence-server.herokuapp.com/lesson/listByCpf?cpf=3
