@@ -102,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var subDates = dates.value.split("-");
     var indexClass = parseInt(subDates[0]);
     classList = jsonGet[indexClass].students;
-    console.log(indexClass)
     console.log("-- List Of Students --")
     
     while (listInHtml.hasChildNodes()) 
@@ -131,13 +130,13 @@ document.addEventListener('DOMContentLoaded', function () {
       httpGet();
   });
 
-  requestButtonRaw.addEventListener("click", function(){
-    var listInHtml = document.getElementById('stdList');
-    while (listInHtml.hasChildNodes()) 
-      listInHtml.removeChild(listInHtml.firstChild);
+  // requestButtonRaw.addEventListener("click", function(){
+  //   var listInHtml = document.getElementById('stdList');
+  //   while (listInHtml.hasChildNodes()) 
+  //     listInHtml.removeChild(listInHtml.firstChild);
     
-      httpGetRaw();
-  });
+  //     httpGetRaw();
+  // });
 
 
 
